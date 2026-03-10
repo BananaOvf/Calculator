@@ -21,6 +21,9 @@
                                 <Setter Property="Background" Value="#3b2e36"/>
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#444444"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
