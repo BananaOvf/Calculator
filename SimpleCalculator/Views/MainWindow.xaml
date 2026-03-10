@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleCalculator"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Simple calulator" MinHeight="380" MinWidth="250" Height="400" Width="480" Background="#2a1a23">
     <Grid>
         <Grid.RowDefinitions>
