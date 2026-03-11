@@ -17,6 +17,13 @@ namespace SimpleCalculator.ViewModels
             set => SetProperty(ref _result, value);
         }
 
+        private string _calculationString = string.Empty;
+        public string CalculationString
+        {
+            get => _calculationString;
+            set => SetProperty(ref _calculationString, value);
+        }
+
         public RelayCommand ClearCommand { get; }
         public RelayCommand CalculateCommand { get; }
         public RelayCommand<string> SymbolCommand { get; }
@@ -36,6 +43,8 @@ namespace SimpleCalculator.ViewModels
             _currentOperation = null;
             _function = null;
             Result = string.Empty;
+
+            CalculationString = string.Empty;
         }
 
         private void AddSymbol(string symbol)
@@ -50,6 +59,8 @@ namespace SimpleCalculator.ViewModels
             }
 
             Result += symbol;
+
+            CalculationString = string.Empty ;
         }
 
         private bool CanAddSymbol(string symbol)
@@ -77,6 +88,7 @@ namespace SimpleCalculator.ViewModels
             {
                 _firstNumber = 0;
             }
+            CalculationString = Result +" " + operation;
 
             // Очищаем поле для ввода второго числа
             Result = string.Empty;
@@ -90,6 +102,7 @@ namespace SimpleCalculator.ViewModels
                 "/" => (a, b) => a / b,
                 _ => null
             };
+
         }
 
         private bool CanSetOperation(string operation)
@@ -123,10 +136,14 @@ namespace SimpleCalculator.ViewModels
 
             try
             {
+
+                CalculationString += " " + Result + " =";
                 double result = _function(_firstNumber, secondNumber);
                 Result = result.ToString(CultureInfo.InvariantCulture);
                 _function = null;
                 _currentOperation = null;
+
+
             }
             catch
             {
