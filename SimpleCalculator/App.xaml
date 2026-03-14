@@ -4,8 +4,8 @@
              xmlns:local="clr-namespace:SimpleCalculator">
     <Application.Resources>
         <Style x:Key="DefaultButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#403A36"/>
-            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="Background" Value="#3c3c3c"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -18,11 +18,11 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#212020"/>
+                                <Setter Property="Background" Value="#323232"/>
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Background" Value="#403A36"/>
+                                <Setter Property="Background" Value="#2c2c2c"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -31,32 +31,36 @@
         </Style>
 
         <Style x:Key="OperationButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-            <Setter Property="Background" Value="#2E2A29"/>
+            <Setter Property="Background" Value="#323232"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#403A36"/>
+                    <Setter Property="Background" Value="#3c3c3c"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="CalculateButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
-            <Setter Property="Background" Value="#42b0ff"/>
+            <Setter Property="Background" Value="#40bdff"/>
             <Setter Property="Foreground" Value="Black"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#3dade9"/>
+                    <Setter Property="Background" Value="#3cade8"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#2e86b4"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
             <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="CaretBrush" Value="LightBlue"/>
+            <Setter Property="CaretBrush" Value="#ffffff"/>
 
         </Style>
     </Application.Resources>
