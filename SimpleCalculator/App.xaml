@@ -54,14 +54,15 @@
 
         <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="CaretBrush" Value="#ffffff"/>
             <Setter Property="Foreground" Value="#ffffff"/>
             <Setter Property="FontSize" Value="40"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="CaretBrush" Value="#ffffff"/>
-
         </Style>
     </Application.Resources>
 </Application>
