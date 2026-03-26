@@ -17,17 +17,32 @@ namespace SimpleCalculator.ViewModels
             set => SetProperty(ref _result, value);
         }
 
+        private string _calculationString = string.Empty;
+        public string CalculationString
+        {
+            get => _calculationString;
+            set => SetProperty(ref _calculationString, value);
+        }
+
         public RelayCommand ClearCommand { get; }
         public RelayCommand CalculateCommand { get; }
         public RelayCommand<string> SymbolCommand { get; }
         public RelayCommand<string> OperationCommand { get; }
-
+        public RelayCommand SignCommand { get; }
+        
         public MainViewModel()
         {
             ClearCommand = new RelayCommand(Clear);
             CalculateCommand = new RelayCommand(Calculate, CanCalculate);
             SymbolCommand = new RelayCommand<string>(AddSymbol, CanAddSymbol);
             OperationCommand = new RelayCommand<string>(SetOperation, CanSetOperation);
+            SignCommand = new RelayCommand(SignInverse, ()=>true);
+        }
+
+        private void SignInverse()
+        {
+            Result = (int.Parse(Result) * -1).ToString();
+            
         }
 
         private void Clear()
@@ -36,12 +51,17 @@ namespace SimpleCalculator.ViewModels
             _currentOperation = null;
             _function = null;
             Result = string.Empty;
+
+            CalculationString = string.Empty;
         }
 
         private void AddSymbol(string symbol)
         {
             if (Result == "Error")
                 return;
+
+            // Убираем очистку CalculationString отсюда
+            // CalculationString = string.Empty; - УДАЛИТЬ ЭТУ СТРОКУ
 
             if (Result == "0" && symbol != ".")
             {
@@ -52,24 +72,6 @@ namespace SimpleCalculator.ViewModels
             Result += symbol;
         }
 
-        private bool CanAddSymbol(string symbol)
-        {
-            if (string.IsNullOrEmpty(symbol))
-                return false;
-
-            char c = symbol[0];
-            if (!char.IsDigit(c) && c != '.')
-                return false;
-
-            if (c == '.')
-            {
-                if (string.IsNullOrEmpty(_result) || _result.Contains('.'))
-                    return false;
-            }
-
-            return true;
-        }
-
         private void SetOperation(string operation)
         {
             // Сохраняем первое число, даже если ввод пуст (тогда считаем его нулём)
@@ -77,6 +79,9 @@ namespace SimpleCalculator.ViewModels
             {
                 _firstNumber = 0;
             }
+
+            // Обновляем строку вычислений, но не очищаем её полностью
+            CalculationString = Result + " " + operation;
 
             // Очищаем поле для ввода второго числа
             Result = string.Empty;
@@ -92,12 +97,7 @@ namespace SimpleCalculator.ViewModels
             };
         }
 
-        private bool CanSetOperation(string operation)
-        {
-            if (Result == "Error")
-                return false;
-            return operation is "+" or "-" or "*" or "/";
-        }
+        
 
         private void Calculate()
         {
@@ -123,6 +123,8 @@ namespace SimpleCalculator.ViewModels
 
             try
             {
+                // Формируем полную строку вычислений
+                CalculationString += " " + Result + " =";
                 double result = _function(_firstNumber, secondNumber);
                 Result = result.ToString(CultureInfo.InvariantCulture);
                 _function = null;
@@ -134,6 +136,31 @@ namespace SimpleCalculator.ViewModels
                 _function = null;
                 _currentOperation = null;
             }
+        }
+
+        private bool CanAddSymbol(string symbol)
+        {
+            if (string.IsNullOrEmpty(symbol))
+                return false;
+
+            char c = symbol[0];
+            if (!char.IsDigit(c) && c != '.')
+                return false;
+
+            if (c == '.')
+            {
+                if (string.IsNullOrEmpty(_result) || _result.Contains('.'))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private bool CanSetOperation(string operation)
+        {
+            if (Result == "Error")
+                return false;
+            return operation is "+" or "-" or "*" or "/";
         }
 
         private bool CanCalculate()
