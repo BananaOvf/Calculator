@@ -1,7 +1,8 @@
 ﻿using SimpleCalculator.Core;
+using SimpleCalculator.Models;
 using System;
-using System.Globalization;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace SimpleCalculator.ViewModels
 {
@@ -25,14 +26,15 @@ namespace SimpleCalculator.ViewModels
             set => SetProperty(ref _calculationString, value);
         }
 
-        public ObservableCollection<string> History { get; } = new();
+        public ObservableCollection<HistoryItem> History { get; } = new();
 
         public RelayCommand ClearCommand { get; }
         public RelayCommand CalculateCommand { get; }
         public RelayCommand<string> SymbolCommand { get; }
         public RelayCommand<string> OperationCommand { get; }
         public RelayCommand SignCommand { get; }
-        
+        public RelayCommand ClearHistoryCommand { get; }
+
         public MainViewModel()
         {
             ClearCommand = new RelayCommand(Clear);
@@ -40,6 +42,7 @@ namespace SimpleCalculator.ViewModels
             SymbolCommand = new RelayCommand<string>(AddSymbol, CanAddSymbol);
             OperationCommand = new RelayCommand<string>(SetOperation, CanSetOperation);
             SignCommand = new RelayCommand(SignInverse, ()=>true);
+            ClearHistoryCommand = new RelayCommand(() => History.Clear());
         }
 
         private void SignInverse()
@@ -131,8 +134,11 @@ namespace SimpleCalculator.ViewModels
                 double result = _function(_firstNumber, secondNumber);
                 Result = result.ToString(CultureInfo.InvariantCulture);
 
-                string entry = $"{CalculationString} {Result}";
-                History.Insert(0, entry);
+                History.Insert(0, new HistoryItem
+                {
+                    Expression = CalculationString,
+                    Result = result.ToString(CultureInfo.InvariantCulture)
+                });
 
                 _function = null;
                 _currentOperation = null;
