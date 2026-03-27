@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Simple calulator" MinHeight="380" MinWidth="250" Height="400" Width="480" Background="#202020">
-    <Grid>
+    <Grid Margin="0 5 0 0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
@@ -19,9 +19,17 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="1" d:Text= "8 + 3 =" Text="{Binding CalculationString}" Foreground="LightGray" TextAlignment="Right" VerticalAlignment="Center" FontSize="18"/>
+        <Button Margin="5 0 0 0" Grid.Row="0" Grid.Column="0" Style="{StaticResource TransparentButtonStyle}" Width="35" HorizontalAlignment="Left">
+            <Viewbox Margin="8">
+                <Canvas Width="24" Height="24">
+                    <Path Fill="#FFEEEEEE" Data="F1 M24,24z M0,0z M12,24C5.4,24,0,18.6,0,12L2,12C2,17.5 6.5,22 12,22 17.5,22 22,17.5 22,12 22,6.5 17.5,2 12,2 8.4,2 5.1,3.9 3.3,7L8,7 8,9 0,9 0,1 2,1 2,5.4C4.2,2.1 8,0 12,0 18.6,0 24,5.4 24,12 24,18.6 18.6,24 12,24z M15.3,17.8L11,13.4 11,6 13,6 13,12.6 16.7,16.4 15.3,17.8z" />
+                </Canvas>
+            </Viewbox>
+        </Button>
 
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Result}" Style="{StaticResource DefaultTextBoxStyle}" />
+        <TextBlock Grid.Column="1" d:Text= "8 + 3 =" Text="{Binding CalculationString}" Margin="0 0 5 0" Foreground="LightGray" TextAlignment="Right" VerticalAlignment="Center" FontSize="18"/>
+
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 0 5 0" Text="{Binding Result}" Style="{StaticResource DefaultTextBoxStyle}" />
 
         <UniformGrid Grid.Row="3" Grid.Column="0" Columns="3">
             <Button Content="1" Command="{Binding SymbolCommand}" CommandParameter="1" Style="{StaticResource DefaultButtonStyle}"/>
