@@ -73,6 +73,25 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
+
+
+        <DrawingImage x:Key="BinImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                    <GeometryDrawing Geometry="F1 M24,24z M0,0z M5.73708,6.54391L5.73708,18.9857C5.73708,19.7449,6.35257,20.3604,7.11182,20.3604L16.8893,20.3604C17.6485,20.3604,18.264,19.7449,18.264,18.9857L18.264,6.54391 M2.90906,6.54391L21.0909,6.54391">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="White" Thickness="1.7" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Geometry="F1 M24,24z M0,0z M8,6L8,4.41421C8,3.63317,8.63317,3,9.41421,3L14.5858,3C15.3668,3,16,3.63317,16,4.41421L16,6">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="White" Thickness="1.7" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
+
         <DrawingImage x:Key="HistoryImage">
             <DrawingImage.Drawing>
                 <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
@@ -84,5 +103,6 @@
                 </DrawingGroup>
             </DrawingImage.Drawing>
         </DrawingImage>
+
     </Application.Resources>
 </Application>
