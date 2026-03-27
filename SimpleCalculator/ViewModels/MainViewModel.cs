@@ -1,6 +1,7 @@
 ﻿using SimpleCalculator.Core;
 using System;
 using System.Globalization;
+using System.Collections.ObjectModel;
 
 namespace SimpleCalculator.ViewModels
 {
@@ -23,6 +24,8 @@ namespace SimpleCalculator.ViewModels
             get => _calculationString;
             set => SetProperty(ref _calculationString, value);
         }
+
+        public ObservableCollection<string> History { get; } = new();
 
         public RelayCommand ClearCommand { get; }
         public RelayCommand CalculateCommand { get; }
@@ -127,6 +130,10 @@ namespace SimpleCalculator.ViewModels
                 CalculationString += " " + Result + " =";
                 double result = _function(_firstNumber, secondNumber);
                 Result = result.ToString(CultureInfo.InvariantCulture);
+
+                string entry = $"{CalculationString} {Result}";
+                History.Insert(0, entry);
+
                 _function = null;
                 _currentOperation = null;
             }
